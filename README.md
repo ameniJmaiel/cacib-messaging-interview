@@ -7,7 +7,7 @@ Cette application est composée de:
  - Un frontend en Angular 17, Node 20
  - Un backend en Java 17 basé sur le Framework Spring Boot
  - Un serveurr IBM MQ
- - Une serveur de base de données PostgreSQL
+ - Un serveur de base de données PostgreSQL
 
 
 ![image](https://github.com/user-attachments/assets/94a068e4-38f3-4014-abf7-40a43bab188e)
