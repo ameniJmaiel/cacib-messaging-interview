@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>Détail du Message</h1>
+<div mat-dialog-content>
+  <p><strong>ID :</strong> {{ data.id }}</p>
+  <p><strong>Contenu :</strong> {{ data.messageBody }}</p>
+  <p><strong>Date :</strong> {{ data.timestamp | date }}</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+</div>

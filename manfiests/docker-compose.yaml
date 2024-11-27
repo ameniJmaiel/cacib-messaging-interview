@@ -1,0 +1,58 @@
+version: '3.3'
+
+services:
+  ibm-mq:
+    image: ibmcom/mq:9.2.4.0-r1-amd64
+    container_name: ibm-mq
+    ports:
+      - "1414:1414"    # Port for MQ client connections
+      - "9443:9443"    # Port for the MQ web console
+    environment:
+      LICENSE: accept
+      MQ_QMGR_NAME: QM1   # Queue Manager Name
+      MQ_APP_PASSWORD: mqpassword   # app user password
+      MQ_ADMIN_PASSWORD: mqpassword   # admin password
+    restart: unless-stopped
+
+  postgres:
+    image: postgres:15
+    container_name: postgres-server
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres_pwd
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432"  
+  
+  backend:
+    image: jmaiela/cacib-test-backend:1.0.5.6
+    container_name: backend
+    restart: always
+    environment:
+  #    ibm.mq.queueManager: QM1
+  #    ibm.mq.channel: DEV_APP_SVRCONN
+  #    ibm.mq.connName: ibm-mq(1414)  
+  #    ibm.mq.user: app  
+  #    ibm.mq.password: mqpassword  
+  #    ibm.mq.queue: DEV_QUEUE_1  
+      MQ_HOSTNAME : ibm-mq
+      MQ_PORT: 1414
+      MQ_QM: QM1
+      MQ_CHANNEL: DEV.APP.SVRCONN
+      MQ_USERNAME: app
+      MQ_USER_PASSWORD: mqpassword
+      SPRING.DATASOURCE.URL: jdbc:postgresql://postgres:5432/mydatabase
+      SPRING.DATASOURCE.USERNAME: postgres
+      SPRING.DATASOURCE.PASSWORD: postgres_pwd
+      SPRING.JPA.HIBERNATE.DDL-AUTO: update
+    ports:
+      - "8080:8080"  
+  
+  frontend:
+    image: jmaiela/cacib-test-frontend:1.0.2
+    container_name: frontend
+    restart: always
+    ports:
+      - "4200:4200"  
+   

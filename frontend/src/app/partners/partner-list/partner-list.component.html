@@ -1,0 +1,37 @@
+<div class="partners-container">
+    <button mat-raised-button color="primary" (click)="addPartner()">Ajouter un partenaire</button>
+    <mat-table [dataSource]="partners" class="mat-elevation-z8">
+      <ng-container matColumnDef="alias">
+        <mat-header-cell *matHeaderCellDef> Alias </mat-header-cell>
+        <mat-cell *matCellDef="let partner"> {{ partner.alias }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="type">
+        <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+        <mat-cell *matCellDef="let partner"> {{ partner.type }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="direction">
+        <mat-header-cell *matHeaderCellDef> Direction </mat-header-cell>
+        <mat-cell *matCellDef="let partner"> {{ partner.direction }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="application">
+        <mat-header-cell *matHeaderCellDef> Aplication </mat-header-cell>
+        <mat-cell *matCellDef="let partner"> {{ partner.application }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="proceedFlowType">
+        <mat-header-cell *matHeaderCellDef> FlowType </mat-header-cell>
+        <mat-cell *matCellDef="let partner"> {{ partner.proceedFlowType }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <mat-header-cell *matHeaderCellDef> Description </mat-header-cell>
+        <mat-cell *matCellDef="let partner"> {{ partner.description }} </mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let partner">
+          <button mat-button color="warn" (click)="deletePartner(partner.id)">Supprimer</button>
+        </mat-cell>
+      </ng-container>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>

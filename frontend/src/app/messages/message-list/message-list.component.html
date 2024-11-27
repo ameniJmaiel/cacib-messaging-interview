@@ -1,0 +1,33 @@
+<div class="messages-container">
+    <mat-table [dataSource]="messages" class="mat-elevation-z8">
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+        <mat-cell *matCellDef="let message"> {{ message.id }} </mat-cell>
+      </ng-container>
+  
+      <!-- Content Column -->
+      <ng-container matColumnDef="messageBody">
+        <mat-header-cell *matHeaderCellDef> Contenu </mat-header-cell>
+        <mat-cell *matCellDef="let message"> {{ message.messageBody | slice:0:50 }}... </mat-cell>
+      </ng-container>
+  
+      <!-- Date Column -->
+      <ng-container matColumnDef="timestamp">
+        <mat-header-cell *matHeaderCellDef> Date </mat-header-cell>
+        <mat-cell *matCellDef="let message"> {{ message.timestamp | date }} </mat-cell>
+      </ng-container>
+  
+      <!-- Actions -->
+      <ng-container matColumnDef="actions">
+        <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+        <mat-cell *matCellDef="let message">
+          <button mat-button (click)="viewDetails(message)">Voir détails</button>
+        </mat-cell>
+      </ng-container>
+  
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+  </div>
+  

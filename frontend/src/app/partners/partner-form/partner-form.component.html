@@ -1,0 +1,58 @@
+ <h1 mat-dialog-title>Ajouter un Partenaire</h1>
+<form [formGroup]="partnerForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Alias</mat-label>
+      <input matInput formControlName="alias" required>
+      <mat-error *ngIf="partnerForm.controls['alias'].hasError('required')">
+        L'alias est requis.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <input matInput formControlName="type" required>
+      <mat-error *ngIf="partnerForm.controls['type'].hasError('required')">
+        Le type est requis.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Direction</mat-label>
+      <mat-select formControlName="direction" required>
+        <mat-option value="INBOUND">INBOUND</mat-option>
+        <mat-option value="OUTBOUND">OUTBOUND</mat-option>
+      </mat-select>
+      <mat-error *ngIf="partnerForm.controls['direction'].hasError('required')">
+        La direction est requise.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Application</mat-label>
+      <input matInput formControlName="application">
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Processed Flow Type</mat-label>
+      <mat-select formControlName="proceedFlowType" required>
+        <mat-option value="MESSAGE">MESSAGE</mat-option>
+        <mat-option value="ALERTING">ALERTING</mat-option>
+        <mat-option value="NOTIFICATION">NOTIFICATION</mat-option>
+      </mat-select>
+      <mat-error *ngIf="partnerForm.controls['proceedFlowType'].hasError('required')">
+        Le type de flux est requis.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+  </mat-dialog-content>
+
+  <mat-dialog-actions>
+    <button mat-button mat-dialog-close>Annuler</button>
+    <button mat-button type="submit" [disabled]="partnerForm.invalid">Ajouter</button>
+  </mat-dialog-actions>
+</form>
